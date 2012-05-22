@@ -1,0 +1,60 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package interfaz.eventos;
+
+import impresion.colaImpresion;
+import interfaz.invitacion;
+import interfaz.avisos.Avisos;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.sql.apachederbylib.exception.NoDriverFoundException;
+import org.sql.apachederbylib.exception.SQLSintaxError;
+
+import registros.DB.DB;
+
+/**
+ *
+ * @author Dell
+ */
+public class invitaciones implements ActionListener{
+    
+    private invitacion inv;
+    
+    public invitaciones(invitacion inv){
+        this.inv=inv;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String nombre=inv.getNombre();
+        int numero=inv.getNumEntradas();
+        try {
+        	if(nombre.isEmpty()){
+        		Avisos.mostrarError(inv, "ERROR", "El nombre no puede estar vacío.", false);
+        	}
+        	else if(numero<0 || numero>10){
+        		Avisos.mostrarError(inv, "ERROR", "El número debe estar entre 1 y 10.", false);
+        	}
+        	else{
+        		DB.addInvitacion(nombre, numero);
+        		inv.resetear();
+        		inv.toogleView();
+        		colaImpresion.imprimirInvitacion(numero);
+        	}
+        } catch (NoDriverFoundException ex) {
+            Logger.getLogger(invitaciones.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(invitaciones.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLSintaxError ex) {
+            Logger.getLogger(invitaciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+}

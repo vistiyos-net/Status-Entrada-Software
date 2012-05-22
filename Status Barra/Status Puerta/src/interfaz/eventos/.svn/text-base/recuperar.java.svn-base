@@ -1,0 +1,23 @@
+package interfaz.eventos;
+
+import interfaz.ventana;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import thread.Recovery;
+
+public class recuperar implements ActionListener {
+	
+	private ventana vnt;
+	
+	public recuperar(ventana vnt){
+		this.vnt=vnt;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		new Recovery(vnt).start();
+	}
+
+}

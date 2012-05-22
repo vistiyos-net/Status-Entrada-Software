@@ -1,0 +1,58 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package interfaz.eventos;
+
+import impresion.colaImpresion;
+import interfaz.pagos;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.sql.apachederbylib.exception.NoDriverFoundException;
+import org.sql.apachederbylib.exception.SQLSintaxError;
+import registros.DB.DB;
+import registros.Indices.Indices;
+
+/**
+ *
+ * @author Dell
+ */
+public class pagoTarjeta implements ActionListener{
+    
+    private pagos tarj;
+   
+    public pagoTarjeta(pagos tarj){
+        this.tarj=tarj;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        try {
+            switch(tarj.getEntrada()){
+                case -1://Canjeo
+                	Indices.indiceCanjeoSIT++;
+                    colaImpresion.imprimirCanjeo();
+                  break;
+                case -2://Talonario
+                	Indices.indiceTalonarioT+=Integer.parseInt(tarj.getOpciones().get("talon"));
+                    colaImpresion.imprimirTalonario(Integer.parseInt(tarj.getOpciones().get("talon")));
+                    break;
+                default:
+                    DB.anadirEntradaTarjeta(tarj.getEntrada());
+                    colaImpresion.imprimirEntrada(tarj.getEntrada());
+                    break;
+            }
+            tarj.toggleView();
+        } catch (NoDriverFoundException ex) {
+            Logger.getLogger(pagoTarjeta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(pagoTarjeta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLSintaxError ex) {
+            Logger.getLogger(pagoTarjeta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+}

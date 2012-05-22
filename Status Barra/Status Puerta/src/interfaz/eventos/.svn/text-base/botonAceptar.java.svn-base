@@ -1,0 +1,57 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package interfaz.eventos;
+
+import interfaz.avisos.Avisos;
+import interfaz.configuracion;
+import interfaz.password;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JPasswordField;
+import org.sql.apachederbylib.exception.NoDriverFoundException;
+import org.sql.apachederbylib.exception.SQLSintaxError;
+import registros.DB.DB;
+
+/**
+ *
+ * @author Dell
+ */
+public class botonAceptar implements ActionListener{
+    
+    private password pass;
+    private JPasswordField password;
+    
+    public botonAceptar(password pass,JPasswordField password){
+        this.pass=pass;
+        this.password=password;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        StringBuilder sb=new StringBuilder();
+        sb.append(this.password.getPassword());
+        if(DB.checkPassword(sb.toString())){
+            try {
+                pass.toggleView();
+                configuracion c=new configuracion(pass.getPadre());
+                c.toggleView();
+            } catch (NoDriverFoundException ex) {
+                Logger.getLogger(botonAceptar.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(botonAceptar.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLSintaxError ex) {
+                Logger.getLogger(botonAceptar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            Avisos.mostrarError(pass, "CONTRASEÑA INCORRECTA", "Ha introducido una clave incorrecta", false);
+            this.password.setText("");
+        }
+    }
+    
+}

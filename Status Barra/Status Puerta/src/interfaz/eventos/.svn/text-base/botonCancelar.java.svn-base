@@ -1,0 +1,36 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package interfaz.eventos;
+
+import interfaz.password;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JPasswordField;
+
+/**
+ *
+ * @author Dell
+ */
+public class botonCancelar implements ActionListener{
+    
+    private password pass;
+    private JPasswordField password;
+    
+    public botonCancelar(password pass,JPasswordField password){
+        this.pass=pass;
+        this.password=password;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(password.getPassword().length==0){
+            pass.setVisible(false);
+        }
+        else{
+            password.setText("");
+        }
+    }
+    
+}

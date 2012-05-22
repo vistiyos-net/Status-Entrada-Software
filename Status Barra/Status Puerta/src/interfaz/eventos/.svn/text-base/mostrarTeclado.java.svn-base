@@ -1,0 +1,24 @@
+package interfaz.eventos;
+
+import interfaz.password;
+import interfaz.ventana;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class mostrarTeclado implements ActionListener {
+	
+	private ventana vnt;
+	private password teclado;
+	
+	public mostrarTeclado(ventana vnt){
+		this.vnt=vnt;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		this.teclado=new password(this.vnt);
+		this.teclado.mostrar();
+	}
+
+}

@@ -5,12 +5,7 @@
 package status;
 
 
-import java.sql.SQLException;
-
-import net.vistiyos.inferfaz.Ventana;
-
-import org.sql.apachederbylib.exception.NoDriverFoundException;
-import org.sql.apachederbylib.exception.SQLSintaxError;
+import net.vistiyos.interfaz.Ventana;
 
 /**
  *
@@ -21,8 +16,7 @@ public class Status {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws NoDriverFoundException, SQLSintaxError, SQLException {
-            Ventana vnt=new Ventana();
-            vnt.setVisible();
+    public static void main(String[] args){
+            new Ventana();
     }
 }

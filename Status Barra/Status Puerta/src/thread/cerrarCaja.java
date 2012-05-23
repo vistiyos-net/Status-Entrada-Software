@@ -11,13 +11,13 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import net.vistiyos.inferfaz.CierreCajaInterfaz;
+import net.vistiyos.interfaz.CierreCajaInterfaz;
+import net.vistiyos.util.EnviarMail;
+import net.vistiyos.util.PDF;
 
 import org.sql.apachederbylib.exception.NoDriverFoundException;
 import org.sql.apachederbylib.exception.SQLSintaxError;
 
-import registros.PDF.generarPDF;
-import registros.mail.enviarMail;
 
 import com.itextpdf.text.BadElementException;
 
@@ -42,7 +42,7 @@ public class cerrarCaja extends Thread{
             interfaz.setMensaje("Generando fichero PDF");
             interfaz.setPorcentaje(0);
             try {
-                generarPDF.generatePDF();
+                PDF.generatePDF();
                 interfaz.setMensaje("Fichero PDF Generado");
                 for(int i=1;i<51;i++){
                     interfaz.setPorcentaje(i);
@@ -53,7 +53,7 @@ public class cerrarCaja extends Thread{
                     }
                 }
                 interfaz.setMensaje("Enviando correo,espere...");
-                enviarMail.enviarEMail();
+                EnviarMail.enviarEMail();
                 for(int i=51;i<101;i++){
                         interfaz.setPorcentaje(i);
                         try {

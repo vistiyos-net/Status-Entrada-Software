@@ -7,8 +7,8 @@ package interfaz.eventos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import net.vistiyos.inferfaz.Invitacion;
-import net.vistiyos.inferfaz.Ventana;
+import net.vistiyos.interfaz.Invitacion;
+import net.vistiyos.interfaz.Ventana;
 
 /**
  *

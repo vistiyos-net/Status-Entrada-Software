@@ -4,8 +4,8 @@ package interfaz.eventos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import net.vistiyos.inferfaz.Password;
-import net.vistiyos.inferfaz.Ventana;
+import net.vistiyos.interfaz.Password;
+import net.vistiyos.interfaz.Ventana;
 
 public class mostrarTeclado implements ActionListener {
 	

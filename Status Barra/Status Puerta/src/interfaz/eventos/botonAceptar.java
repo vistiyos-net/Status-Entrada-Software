@@ -13,8 +13,8 @@ import java.util.logging.Logger;
 import javax.swing.JPasswordField;
 
 import net.vistiyos.db.MySQL;
-import net.vistiyos.inferfaz.Configuracion;
-import net.vistiyos.inferfaz.Password;
+import net.vistiyos.interfaz.Configuracion;
+import net.vistiyos.interfaz.Password;
 
 import org.sql.apachederbylib.exception.NoDriverFoundException;
 import org.sql.apachederbylib.exception.SQLSintaxError;

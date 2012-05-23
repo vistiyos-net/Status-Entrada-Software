@@ -13,8 +13,8 @@ import java.util.logging.Logger;
 
 import net.vistiyos.db.MySQL;
 import net.vistiyos.impresion.colaImpresion;
-import net.vistiyos.inferfaz.Pagos;
-import net.vistiyos.inferfaz.Ventana;
+import net.vistiyos.interfaz.Pagos;
+import net.vistiyos.interfaz.Ventana;
 
 import org.sql.apachederbylib.exception.NoDriverFoundException;
 import org.sql.apachederbylib.exception.SQLSintaxError;

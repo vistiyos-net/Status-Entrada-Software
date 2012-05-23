@@ -27,10 +27,10 @@ public class MySQL {
     public static boolean isTurnoActivo(){
     	getConexion();
     	try{
-    		String sql = "SELECT count(*) FROM turnos WHERE activo=1";
+    		String sql = "SELECT count(*) as contador FROM turnos WHERE activo=1";
     		ResultSet resultado = conexion.createStatement().executeQuery(sql);
     		if(resultado.next()){
-    			if(resultado.getInt(1) == 1){
+    			if(resultado.getInt("contador") == 1){
     				return true;
     			}
     			return false;

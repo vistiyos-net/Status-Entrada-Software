@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 import net.vistiyos.db.MySQL;
 import net.vistiyos.impresion.colaImpresion;
-import net.vistiyos.inferfaz.Invitacion;
+import net.vistiyos.interfaz.Invitacion;
 
 import org.sql.apachederbylib.exception.NoDriverFoundException;
 import org.sql.apachederbylib.exception.SQLSintaxError;

@@ -8,9 +8,9 @@ package interfaz.eventos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import net.vistiyos.inferfaz.Boton;
-import net.vistiyos.inferfaz.Pagos;
-import net.vistiyos.inferfaz.Ventana;
+import net.vistiyos.interfaz.Boton;
+import net.vistiyos.interfaz.Pagos;
+import net.vistiyos.interfaz.Ventana;
 
 /**
  *

@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import net.vistiyos.db.MySQL;
-import net.vistiyos.inferfaz.Configuracion;
+import net.vistiyos.interfaz.Configuracion;
 
 import org.sql.apachederbylib.exception.NoDriverFoundException;
 import org.sql.apachederbylib.exception.SQLSintaxError;

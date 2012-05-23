@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPasswordField;
 
-import net.vistiyos.inferfaz.Password;
+import net.vistiyos.interfaz.Password;
 
 /**
  *

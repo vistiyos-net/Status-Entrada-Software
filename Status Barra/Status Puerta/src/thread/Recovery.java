@@ -5,12 +5,12 @@ import interfaz.avisos.Avisos;
 import java.sql.SQLException;
 
 import net.vistiyos.db.MySQL;
-import net.vistiyos.inferfaz.Ventana;
+import net.vistiyos.interfaz.Ventana;
+import net.vistiyos.util.EnviarMail;
 
 import org.sql.apachederbylib.exception.NoDriverFoundException;
 import org.sql.apachederbylib.exception.SQLSintaxError;
 
-import registros.mail.enviarMail;
 
 public class Recovery extends Thread {
 	
@@ -23,7 +23,7 @@ public class Recovery extends Thread {
 	public void run(){
 		try {
 			String password=MySQL.getPassword();
-			enviarMail.enviarPassword(password);
+			EnviarMail.enviarPassword(password);
 			Avisos.mostrarMensaje(vnt, "Mensaje enviado", "Se ha enviado un correo electronico con la contraseña.");
 		} catch (NoDriverFoundException e) {
 			// TODO Auto-generated catch block

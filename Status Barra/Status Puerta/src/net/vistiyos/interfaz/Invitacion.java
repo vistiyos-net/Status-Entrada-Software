@@ -1,12 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package net.vistiyos.interfaz;
 
-import interfaz.eventos.invitaciones;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -17,45 +16,51 @@ import javax.swing.JTextField;
  *
  * @author Dell
  */
-public class Invitacion extends JDialog{
+public class Invitacion extends JDialog implements ActionListener{
     
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = -1999103455329517004L;
 	private JTextField nombre;
     private JTextField num;
-    private Ventana vnt;
     
     public Invitacion(Ventana vnt){
         super(vnt,"INVITACIONES");
-        this.vnt=vnt;
         JPanel panel=new JPanel();
-        panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
-        JPanel nomb=new JPanel();
-        nomb.setLayout(new BoxLayout(nomb,BoxLayout.X_AXIS));
-        JPanel numer=new JPanel();
-        numer.setLayout(new BoxLayout(numer,BoxLayout.X_AXIS));
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints estilo = new GridBagConstraints();
+        estilo.gridx = 0;
+        estilo.gridy = 0;
+        estilo.gridheight = 1;
+        estilo.gridwidth = 1;
+        estilo.weightx = 1.0;
+        estilo.weighty = 1.0;
+        estilo.fill = GridBagConstraints.BOTH;
         JLabel nom=new JLabel("Nombre:");
-        nomb.add(nom);
+        panel.add(nom,estilo);
         nombre=new JTextField(50);
-        nomb.add(nombre);
+        estilo.gridx++;
+        panel.add(nombre,estilo);
         JLabel nume=new JLabel("Número de Invitaciones (MAX 10):");
-        numer.add(nume);
+        estilo.gridx = 0;
+        estilo.gridy++;
+        panel.add(nume,estilo);
         num=new JTextField(5);
-        numer.add(this.num);
-        panel.add(nomb);
-        panel.add(numer);
+        estilo.gridx++;
+        panel.add(this.num,estilo);
         JButton imprimir=new JButton("Imprimir");
-        invitaciones invi=new invitaciones(this);
-        imprimir.addActionListener(invi);
-        panel.add(imprimir);
+        imprimir.addActionListener(this);
+        estilo.gridx = 0;
+        estilo.gridy++;
+        estilo.gridwidth = 2;
+        panel.add(imprimir,estilo);
         this.setContentPane(panel);
-        this.pack();
+        this.setSize(500, 100);
+        this.setModalityType(ModalityType.APPLICATION_MODAL);
+        this.setUndecorated(true);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
     
-    public void toogleView(){
-    	vnt.inhabilitarVolver();
+    public void toogleView(){	
         this.setVisible(!this.isVisible());
     }
     
@@ -75,5 +80,10 @@ public class Invitacion extends JDialog{
         this.nombre.setText("");
         this.num.setText("");
     }
+
+	@Override
+	public void actionPerformed(ActionEvent event) {
+		
+	}
     
 }

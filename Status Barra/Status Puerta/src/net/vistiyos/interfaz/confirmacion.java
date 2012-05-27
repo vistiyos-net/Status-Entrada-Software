@@ -4,8 +4,6 @@
  */
 package net.vistiyos.interfaz;
 
-import interfaz.eventos.cierreCaja;
-
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -18,16 +16,13 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Dell
+ * @author Víctor Escobar
  */
-public class confirmacion extends JDialog{
+public class Confirmacion extends JDialog implements ActionListener{
     
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = -4458461313510399206L;
 
-	confirmacion(Ventana vnt){
+	Confirmacion(Ventana vnt){
         super(vnt,"CONFIRMACIÓN");
         JPanel panel=new JPanel();
         panel.setLayout(new GridBagLayout());
@@ -40,27 +35,35 @@ public class confirmacion extends JDialog{
         cn.weightx=1.0;
         cn.weighty=1.0;
         JButton si=new JButton("SI");
+        si.setName("SI");
         si.setFont(new Font("ARIAL",Font.BOLD,40));
-        si.addActionListener(new cierreCaja((Ventana)this.getParent(),this));
+        si.addActionListener(this);
         JButton no=new JButton("NO");
+        no.setName("NO");
         no.setFont(new Font("ARIAL",Font.BOLD,40));
-        no.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                net.vistiyos.interfaz.confirmacion.this.toggleView();
-            }
-        });
+        no.addActionListener(this);
         panel.add(si, cn);
         cn.gridx=1;
         panel.add(no,cn);
         this.setContentPane(panel);
         this.setSize(700, 200);
         this.setBounds(200, 200, 700, 200);
+        this.setModalityType(ModalityType.APPLICATION_MODAL);
     }
     
     public void toggleView(){
         this.setVisible(!this.isVisible());
     }
+
+	@Override
+	public void actionPerformed(ActionEvent event){
+		JButton accion = (JButton) event.getSource();
+		if(accion.getName().equals("SI")){
+			
+		}
+		else if(accion.getName().equals("NO")){
+			this.toggleView();
+		}
+	}
     
 }

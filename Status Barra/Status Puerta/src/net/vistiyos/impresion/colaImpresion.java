@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package net.vistiyos.impresion;
 
-import interfaz.avisos.Avisos;
+package net.vistiyos.impresion;
 
 import java.awt.print.PageFormat;
 import java.awt.print.Paper;
@@ -14,14 +9,9 @@ import java.sql.SQLException;
 
 import net.vistiyos.db.MySQL;
 
-import org.sql.apachederbylib.exception.NoDriverFoundException;
-import org.sql.apachederbylib.exception.SQLSintaxError;
-
-import registros.Indices.Indices;
-
 /*
  *
- * @author Dell
+ * @author Víctor Escobar
  */
 public class colaImpresion {
     
@@ -37,7 +27,7 @@ public class colaImpresion {
         pf.setPaper(paper);
     }
     
-    static public void imprimirEntrada(int id) throws NoDriverFoundException, SQLException, SQLSintaxError{
+    static public void imprimirEntrada(int id){
         try{
             setPrinterQueue();
             impresionEntrada impresion=new impresionEntrada(id);
@@ -51,7 +41,7 @@ public class colaImpresion {
         }
     }
     
-    static public void imprimirInvitacion(int invitaciones) throws NoDriverFoundException, SQLException, SQLSintaxError{
+    static public void imprimirInvitacion(int invitaciones){
         try{
             setPrinterQueue();
             impresionInvitacion impresion=new impresionInvitacion();
@@ -66,7 +56,7 @@ public class colaImpresion {
         }
     }
     
-    static public void imprimirTalonario(int num) throws NoDriverFoundException, SQLException, SQLSintaxError{
+    static public void imprimirTalonario(int num){
         try{
             setPrinterQueue();
             impresionTalonario impresion=new impresionTalonario();
@@ -80,7 +70,7 @@ public class colaImpresion {
         }
     }
     
-     static public void imprimirCanjeo() throws NoDriverFoundException, SQLException, SQLSintaxError{
+     static public void imprimirCanjeo(){
         try{
             setPrinterQueue();
             impresionCanjeo impresion=new impresionCanjeo();

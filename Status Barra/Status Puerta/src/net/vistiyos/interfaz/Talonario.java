@@ -1,31 +1,26 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package net.vistiyos.interfaz;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
+import net.vistiyos.db.MySQL;
+
 /**
  *
- * @author Dell
+ * @author Víctor Escobar
  */
-public class Talonario extends JDialog{
+public class Talonario extends JDialog implements ActionListener{
     
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 320526049733494893L;
 	private JComboBox<String> lista;
     private JButton aceptar;
@@ -43,36 +38,39 @@ public class Talonario extends JDialog{
         cn.fill=GridBagConstraints.BOTH;
         cn.weightx=1.0;
         cn.weighty=1.0;
-        String[] cantidad=new String[10];
+        String[] cantidad=new String[MySQL.getMaxTalonario()];
         for(int i=0;i<cantidad.length;i++){
             cantidad[i]=Integer.toString(i+1);
         }
         lista=new JComboBox<String>(cantidad);
-        lista.setFont(new Font("ARIAL",Font.BOLD,40));
+        lista.setFont(new Font("ARIAL",Font.BOLD,25));
         panel.add(lista,cn);
         cn.gridwidth=1;
         cn.gridx=0;
         cn.gridy=1;
-        this.aceptar=new JButton("ACEPTAR");
-        aceptar.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Map<String,String> map=new HashMap<String, String>();
-                map.put("talon", String.valueOf(lista.getSelectedItem()));
-                new Pagos((Ventana)net.vistiyos.interfaz.Talonario.this.getParent(),-2,map).toggleView();
-                net.vistiyos.interfaz.Talonario.this.toggleView();
-            }
-        });
-        aceptar.setFont(new Font("ARIAL",Font.BOLD,40));
+        this.aceptar=new JButton("Aceptar");
+        aceptar.addActionListener(this);
+        aceptar.setOpaque(false);
+		aceptar.setContentAreaFilled(false);
+		aceptar.setForeground(Color.BLACK);
+        aceptar.setFont(new Font("ARIAL",Font.BOLD,25));
         panel.add(aceptar,cn);
         this.setContentPane(panel);
-        this.setSize(700, 200);
-        this.setBounds(200, 200, 700, 200);
+        this.setSize(500, 150);
+        this.setModalityType(ModalityType.APPLICATION_MODAL);
+        this.setUndecorated(true);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
     
     public void toggleView(){
         this.setVisible(!this.isVisible());
     }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		new PagosTalonario((Ventana)this.getParent(),Integer.parseInt(String.valueOf(lista.getSelectedItem()))).toggleView();
+        this.toggleView();
+	}
     
 }

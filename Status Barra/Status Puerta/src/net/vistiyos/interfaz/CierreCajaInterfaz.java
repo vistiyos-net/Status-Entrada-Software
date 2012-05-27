@@ -17,18 +17,14 @@ import javax.swing.JProgressBar;
  */
 public class CierreCajaInterfaz extends JDialog{
     
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = -8413292777174005477L;
 	private JProgressBar barra;
     private JLabel mensaje;
     private JPanel panel;
-    private Ventana vnt;
+
     
     public CierreCajaInterfaz(Ventana vnt){
         super(vnt,"CIERRE DE CAJA");
-        this.vnt=vnt;
         barra=new JProgressBar(0,100);
         barra.setBorderPainted(true);
         mensaje=new JLabel();
@@ -39,6 +35,7 @@ public class CierreCajaInterfaz extends JDialog{
         this.setContentPane(panel);
         this.pack();
         this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        this.setModalityType(ModalityType.APPLICATION_MODAL);
         this.setResizable(false);
     }
     
@@ -67,9 +64,4 @@ public class CierreCajaInterfaz extends JDialog{
         } 
         this.pack();
     }
-    
-    public void habilitarVolver(){
-    		vnt.habilitarVolver();
-    }
-    
 }

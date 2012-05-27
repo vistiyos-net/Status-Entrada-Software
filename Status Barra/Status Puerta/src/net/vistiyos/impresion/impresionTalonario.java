@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package net.vistiyos.impresion;
 
 import java.awt.Color;
@@ -11,11 +8,9 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.util.Calendar;
 
-import registros.Indices.Indices;
-
 /**
  *
- * @author Dell
+ * @author V�ctor Escobar
  */
 public class impresionTalonario implements Printable{
 
@@ -24,7 +19,7 @@ public class impresionTalonario implements Printable{
    {
       switch (pageIndex)
       {
-         case 0 : //Página 1: Dibujamos sobre g y luego lo pasamos a g2
+         case 0 : 
              Calendar c=Calendar.getInstance();
              String fecha=c.get(Calendar.DAY_OF_MONTH)+"-"+(c.get(Calendar.MONTH)+1)+"-"+c.get(Calendar.YEAR);
              g.setFont(new Font("ARIAL",Font.BOLD,20));
@@ -34,9 +29,9 @@ public class impresionTalonario implements Printable{
              g.setColor(Color.BLACK);
              g.drawRect(1, 1, 200, 165);
              g.drawString("TAL�N #"+Indices.indiceTalonario, 5, 15);//ID
-             return PAGE_EXISTS; //La página 1 existe y se imprimirá
+             return PAGE_EXISTS; 
          default: 
-             return NO_SUCH_PAGE;        //No se imprimirán más páginas
+             return NO_SUCH_PAGE;        
       }
    }
 }

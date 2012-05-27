@@ -1,16 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package net.vistiyos.interfaz;
 
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -18,20 +15,12 @@ import javax.swing.JPanel;
 
 import net.vistiyos.impresion.colaImpresion;
 
-import org.sql.apachederbylib.exception.NoDriverFoundException;
-import org.sql.apachederbylib.exception.SQLSintaxError;
-
-import registros.Indices.Indices;
-
 /**
  *
- * @author Dell
+ * @author Víctor Escobar
  */
-public class Canjeo extends JDialog{
+public class Canjeo extends JDialog implements ActionListener{
     
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = -1316015017833650915L;
 	private JPanel panel;
     private JButton pago;
@@ -49,51 +38,44 @@ public class Canjeo extends JDialog{
         cn.fill=GridBagConstraints.BOTH;
         cn.weightx=1.0;
         cn.weighty=1.0;
-        pago=new JButton("PAGAR");
-        pago.setFont(new Font("ARIAL",Font.BOLD,40));
-        pago.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	Indices.indiceCanjeoSI++;
-                new Pagos((Ventana)net.vistiyos.interfaz.Canjeo.this.getParent(),-1,null).toggleView();
-                net.vistiyos.interfaz.Canjeo.this.toggleView();
-            }
-        });
-        canjeo=new JButton("CANJEAR");
-        canjeo.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Almacenar registro de Canjeados
-            	try {
-            		Indices.indiceCanjeoNO++;
-					colaImpresion.imprimirCanjeo();
-				} catch (NoDriverFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (SQLSintaxError e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-                net.vistiyos.interfaz.Canjeo.this.toggleView();
-            }
-        });
-        canjeo.setFont(new Font("ARIAL",Font.BOLD,40));
+        pago=new JButton("Pagar");
+        pago.setName("pagar");
+        pago.setOpaque(false);
+		pago.setContentAreaFilled(false);
+		pago.setForeground(Color.BLACK);
+        pago.setFont(new Font("ARIAL",Font.BOLD,25));
+        pago.addActionListener(this);
+        canjeo=new JButton("Canjear");
+        canjeo.setName("canjear");
+        canjeo.setOpaque(false);
+		canjeo.setContentAreaFilled(false);
+		canjeo.setForeground(Color.BLACK);
+        canjeo.addActionListener(this);
+        canjeo.setFont(new Font("ARIAL",Font.BOLD,25));
         panel.add(pago, cn);
         cn.gridx++;
         panel.add(canjeo, cn);
         this.setContentPane(panel);
-        this.setSize(700, 200);
-        this.setBounds(200, 200, 700, 200);
+        this.setSize(500, 150);
+        this.setModalityType(ModalityType.APPLICATION_MODAL);
+        this.setUndecorated(true);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
-    
-    public void toggleView(){
-        this.setVisible(!this.isVisible());
-    }
+
+	@Override
+	public void actionPerformed(ActionEvent event) {
+		JButton accion = (JButton) event.getSource();
+		if(accion.getName().equals("canjear")){
+			colaImpresion.imprimirCanjeo();
+			this.setVisible(false);
+		}
+		else if(accion.getName().equals("pagar")){
+			new Pagos((Ventana)this.getParent()).toggleView();
+			this.setVisible(false);
+		}
+		
+	}
     
     
 }
